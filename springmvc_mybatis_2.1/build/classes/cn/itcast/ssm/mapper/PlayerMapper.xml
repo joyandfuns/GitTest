@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.ssm.mapper.PlayerMapper">
+	<select id="findPlayerByGoals" resultType="cn.itcast.ssm.po.Liverpool">
+		SELECT liverpool.number,liverpool.name,
+		liverpool.birthday,liverpool.position,liverpool.national
+        FROM liverpool 
+        WHERE liverpool.goals>0
+	</select>
+	<select id="findAllPlayers" resultType="cn.itcast.ssm.po.Liverpool">
+		SELECT * FROM liverpool
+	</select>
+	<select id="findPlayerByNumber" parameterType="int" resultType="cn.itcast.ssm.po.Liverpool">
+	    SELECT * FROM liverpool WHERE liverpool.number=#{id}
+	</select>
+	<update id="updatePlayer" parameterType="cn.itcast.ssm.po.Liverpool">
+		update liverpool set goals=#{goals},assists=#{assists},round=#{round} where number=#{number}
+	</update>
+	<insert id="insertPlayer" parameterType="cn.itcast.ssm.po.Liverpool">
+		insert into liverpool 
+		(number,name,position,age,birthday,club,national,height,weight,goals,assists,round)
+		values
+		(#{number},#{name},#{position},#{age},#{birthday},#{club},#{national},#{height},#{weight},#{goals},#{assists},#{round}) 
+	</insert>
+	<delete id="deletePlayerByID" parameterType="int">
+		delete from liverpool where number=#{id}
+	</delete>
+</mapper>
